@@ -10,13 +10,13 @@ if __name__ == "__main__":
     # 1. Data
     # ----------------------------
 
-    with open("configs/trial01.yaml", "r") as f:
+    with open("configs/train01.yaml", "r") as f:
         cfg = yaml.safe_load(f)
     print(cfg)
 
     transform = transforms.Compose(
         [
-            transforms.Resize((256, 256)),
+            transforms.Resize((512, 512)),
             transforms.ToTensor(),
         ]
     )
