@@ -1,8 +1,8 @@
 # Data paths
 data:
-  drrs: ".\\data\\drrs"
-  xrays: ".\\data\\xrays"
-  masks: ".\\data\\masks"
+  drrs: "./data/drrs"
+  xrays: "./data/xrays"
+  masks: "./data/masks"
   batch_size: 2
   num_workers: 4
 
@@ -58,4 +58,4 @@ checkpoint:
   monitor: "val_total_loss"
   save_top_k: 3
   mode: "min"
-  filename: "joint-{epoch:02d}-{val_total_loss:.4f}"
+  filename: "{epoch:02d}-{val_total_loss:.4f}"

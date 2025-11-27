@@ -82,6 +82,7 @@ class Module(pl.LightningModule):
                 output_tensors["fake_xray"][0],
                 output_tensors["rec_drr"][0],
                 masks[0],
+                output_tensors["pred_masks"][0],
             ]
             save_visualization(
                 drr_grid,
@@ -92,7 +93,6 @@ class Module(pl.LightningModule):
                 xrays[0],
                 output_tensors["fake_drr"][0],
                 output_tensors["rec_xray"][0],
-                masks[0],
             ]
             save_visualization(
                 xray_grid,
@@ -128,6 +128,9 @@ class Module(pl.LightningModule):
         target_size = masks.shape[2:]
         upsampled_logits = resample_logits(
             output_tensors["segmentation"].logits, target_size
+        )
+        output_tensors["pred_masks"] = torch.argmax(
+            upsampled_logits, dim=1, keepdim=True
         )
         seg_loss = self.seg_loss(upsampled_logits, masks.long().squeeze(1))
         total_loss = gan_loss + seg_loss

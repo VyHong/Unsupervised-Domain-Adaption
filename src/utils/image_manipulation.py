@@ -14,10 +14,15 @@ def resample_logits(tensor, target_size):
 
 
 def save_visualization(grid, save_path):
+    for i, image in enumerate(grid):
+        if image.shape[0] == 1:
+            # Use repeat_interleave to copy the single channel 3 times
+            # This transforms [1, 512, 512] to [3, 512, 512]
+            grayscale_rgb = image.repeat_interleave(3, dim=0)
+            grid[i] = grayscale_rgb
 
-    vis_tensors = torch.cat(grid, dim=0)
     image_grid = vutils.make_grid(
-        vis_tensors,
+        grid,
         nrow=len(grid),  # Sets the number of columns to 4
         normalize=True,  # Important: Scales [-1, 1] images and [0, N] masks to [0, 1]
         scale_each=True,  # Ensures each tensor (image or mask) is scaled independently
