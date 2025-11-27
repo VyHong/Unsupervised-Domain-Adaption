@@ -47,7 +47,7 @@ class CachedMappedDataset(Dataset):
 
             # Store the processed tensors
             self._cached_data.append(
-                {"drrs": drr_tensor, "xrays": xray_tensor, "mask": mask_tensor}
+                {"drrs": drr_tensor, "xrays": xray_tensor, "masks": mask_tensor}
             )
 
         print("Caching complete.")

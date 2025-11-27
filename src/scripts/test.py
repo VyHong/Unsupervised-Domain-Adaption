@@ -1,60 +1,52 @@
-import pytorch_lightning as pl
-from ..modules.module import Module  # Replace with your actual import
-import yaml
-from ..datamodules.cached_dataset import CachedMappedDataset
+import argparse
 import os
+import yaml
+import types
+
+import pytorch_lightning as pl
 from torchvision import transforms
-import torch
-import torchvision.utils as vutils
-import torch.nn.functional as F
 
-CHECKPOINT_PATH = r"C:\Users\waiho\Coding Projects\Unsupervised-Domain-Adaption\lightning_logs\version_40\checkpoints\joint-epoch=89-val_total_loss=1.4417.ckpt"
+from ..modules.cyclegan_segment_module import Module
+from ..datamodules.datamodule import DataModule
+
+
 if __name__ == "__main__":
-    # Load the model weights into a new instance of your module class
-    # NOTE: If your __init__ requires 'cfg', you must pass it here.
-    with open("configs/trial01.yaml", "r") as f:
-        cfg = yaml.safe_load(f)
-    print(cfg)
-    loaded_module = Module.load_from_checkpoint(CHECKPOINT_PATH, cfg=cfg)
 
-    drrs_dir = os.path.join(cfg["data"]["drrs"], "train")
-    xrays_dir = os.path.join(cfg["data"]["xrays"], "train")
-    masks_dir = os.path.join(cfg["data"]["masks"], "train")
+    with open(r"configs\train01.yaml", "r") as f:
+        cfg = yaml.safe_load(f)
+
+    checkpoint_path = r"C:\Users\waiho\Coding Projects\Unsupervised-Domain-Adaption\lightning_logs\version_50\checkpoints\joint-epoch=09-val_total_loss=6.0189.ckpt"
+    # Load model from checkpoint (this will restore weights + hyperparameters passed in save)
+    model = Module.load_from_checkpoint(checkpoint_path, cfg=cfg)
+
     transform = transforms.Compose(
         [
             transforms.Resize((256, 256)),
             transforms.ToTensor(),
         ]
     )
-
-    test_dataset = CachedMappedDataset(
-        drrs_dir=drrs_dir, xrays_dir=xrays_dir, masks_dir=masks_dir, transform=transform
+    # Instantiate the project's DataModule and prepare the test dataloader
+    datamodule = DataModule(
+        drrs_dir=cfg["data"]["drrs"],
+        xrays_dir=cfg["data"]["xrays"],
+        masks_dir=cfg["data"]["masks"],
+        transform=transform,
+        batch_size=cfg["data"]["batch_size"],
+        num_workers=cfg["data"]["num_workers"],
     )
 
-    input_tensors = test_dataset.__getitem__(0)
-    loaded_module.eval()
-    loaded_module.half()
-    fake_img, pred_mask = loaded_module(
-        input_tensors["drrs"].to(dtype=torch.float16),
-        input_tensors["xrays"].to(dtype=torch.float16),
-    )
-    grid_data = [
-        # Col 2: Generated Output (Fake X-ray)
-        fake_img,
-        # Col 4: Segmentation Prediction from Fake X-ray
-        pred_mask.logits,
-    ]
+    # Run the DataModule setup to prepare datasets
+    datamodule.setup()
 
-    vis_tensors = torch.cat(grid_data, dim=0)
+    # If the Module doesn't implement `test_step`, reuse `validation_step` by binding it
 
-    # Make the grid (e.g., max_images rows, 4 columns)
-    image_grid = vutils.make_grid(
-        vis_tensors,
-        nrow=len(grid_data),  # Sets the number of columns to 4
-        normalize=True,  # Important: Scales [-1, 1] images and [0, N] masks to [0, 1]
-        scale_each=True,  # Ensures each tensor (image or mask) is scaled independently
+    trainer = pl.Trainer(
+        accelerator=cfg["trainer"]["accelerator"],
+        devices=cfg["trainer"]["devices"],
+        precision=cfg["trainer"]["precision"],
+        log_every_n_steps=cfg["trainer"]["log_every_n_steps"],
     )
 
-    save_path = r".\test_1.png"
-    vutils.save_image(image_grid, save_path)
-    # predictions = loaded_module.segmentation(input_tensor)
+    # Run test. We already loaded weights into `model`, so pass `ckpt_path=None`.
+    results = trainer.test(model, datamodule=datamodule, ckpt_path=None)
+    print("Test results:", results)

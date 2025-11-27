@@ -19,9 +19,11 @@ trainer:
 #CycleGAN hyperparameters
 cyclegan:
   lr: 2e-4
+
+  isTrain: True
   lambda_cycle: 10.0
-  lambda_A: 0.1
-  lambda_B: 0.1
+  lambda_A: 10
+  lambda_B: 10
   lambda_identity: 0.5
   model: "cycle_gan"
   input_nc: 3 # Number of input image channels (e.g., 3 for RGB)
@@ -35,8 +37,6 @@ cyclegan:
   no_dropout: False # Whether to use dropout in the generator (False means dropout is used)
   init_type: "normal" # Network initialization method
   init_gain: 0.02 # Scaling factor for initialization
-  isTrain: True
-  verbose: False
   pool_size: 50
   gan_mode: lsgan
   direction: AtoB
@@ -46,8 +46,7 @@ cyclegan:
 segmodel:
   lr: 2e-4
   name: "nvidia/segformer-b0-finetuned-ade-512-512"
-  loss: "cross_entropy"
-  num_classes: 2
+  num_labels: 2
 
 # Loss weighting
 loss_weights:

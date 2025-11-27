@@ -1,11 +1,11 @@
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
-from src.models.cyclegan import CycleGANModel
+from src.models.cyclegan.cyclegan import CycleGANModel
 from src.models.hf_segmentation_wrapper import get_hf_model
 import wandb
+from src.utils.image_manipulation import resample_logits, save_visualization
 from ..utils.config_object import dict_to_simple_object
-import torch.nn.functional as F
 
 
 class Module(pl.LightningModule):
@@ -14,7 +14,9 @@ class Module(pl.LightningModule):
         opt = dict_to_simple_object(cfg["cyclegan"])
 
         self.cyclegan = CycleGANModel(opt)
-        self.segmentation, self.seg_extractor = get_hf_model(cfg["segmodel"]["name"])
+        self.segmentation, self.seg_extractor = get_hf_model(
+            cfg["segmodel"]["name"], cfg["segmodel"]["num_labels"]
+        )
 
         self.to("cuda")
         self.train()
@@ -22,7 +24,6 @@ class Module(pl.LightningModule):
         self.gan_lr = cfg["cyclegan"]["lr"]
         self.seg_lr = cfg["segmodel"]["lr"]
 
-        self.l1_loss = nn.L1Loss()
         self.seg_loss = nn.CrossEntropyLoss()
         if opt.isTrain:
             self.run = wandb.init(
@@ -33,16 +34,20 @@ class Module(pl.LightningModule):
         input_images = {"A": drrs, "B": xrays}
         self.cyclegan.set_input(input_images)
         self.cyclegan.forward()
-        fake = self.cyclegan.get_to_segment_data()  # generate synthetic image
-        fake_features = self.seg_extractor(fake, return_tensors="pt")
+        images = self.cyclegan.get_images()  # generate synthetic image
+        fake_features = self.seg_extractor(images["fake_xray"], return_tensors="pt")
         for k in fake_features:
             fake_features[k] = fake_features[k].to(device="cuda", dtype=torch.float16)
 
         seg = self.segmentation(**fake_features)  # segment it
-        return fake, seg
+
+        output_tensors = {**images, **{"segmentation": seg}}
+        return output_tensors
 
     def training_step(self, batch, batch_idx):
-        gan_loss, seg_loss, total_loss, fake_img = self.shared_step(batch, batch_idx)
+        gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
+            batch, batch_idx
+        )
         log_dict = {
             "train_gan_loss": gan_loss,
             "train_seg_loss": seg_loss,
@@ -55,7 +60,9 @@ class Module(pl.LightningModule):
         return total_loss
 
     def validation_step(self, batch, batch_idx):
-        gan_loss, seg_loss, total_loss, fake_img = self.shared_step(batch, batch_idx)
+        gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
+            batch, batch_idx
+        )
         log_dict = {
             "val_gan_loss": gan_loss,
             "val_seg_loss": seg_loss,
@@ -66,38 +73,70 @@ class Module(pl.LightningModule):
         self.log("val_seg_loss", seg_loss, prog_bar=True, on_epoch=True)
         self.log("val_total_loss", total_loss, prog_bar=True, on_epoch=True)
 
-        drrs = batch["drrs"]
-        if batch_idx == 100:
-            grid = torch.cat([drrs[:4], fake_img[:4]], dim=-1)
-            self.logger.experiment.add_images("val_real_fake", grid, self.current_epoch)
+        if batch_idx == 0:
+            drrs = batch["drrs"]
+            xrays = batch["xrays"]
+            masks = batch["masks"]
+            drr_grid = [
+                drrs[0],
+                output_tensors["fake_xray"][0],
+                output_tensors["rec_drr"][0],
+                masks[0],
+            ]
+            save_visualization(
+                drr_grid,
+                self.logger.log_dir + f"\epoch={self.current_epoch:02d}_val_drr.png",
+            )
+
+            xray_grid = [
+                xrays[0],
+                output_tensors["fake_drr"][0],
+                output_tensors["rec_xray"][0],
+                masks[0],
+            ]
+            save_visualization(
+                xray_grid,
+                self.logger.log_dir + f"\epoch={self.current_epoch:02d}_val_xray.png",
+            )
+
+        return total_loss
+
+    def test_step(self, batch, batch_idx):
+        gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
+            batch, batch_idx
+        )
+        log_dict = {
+            "test_gan_loss": gan_loss,
+            "test_seg_loss": seg_loss,
+            "test_total_loss": total_loss,
+        }
+        self.run.log(log_dict)
+        self.log("test_gan_loss", gan_loss, prog_bar=True, on_epoch=True)
+        self.log("test_seg_loss", seg_loss, prog_bar=True, on_epoch=True)
+        self.log("test_total_loss", total_loss, prog_bar=True, on_epoch=True)
 
         return total_loss
 
     def shared_step(self, batch, batch_idx):
         drrs = batch["drrs"]
         xrays = batch["xrays"]
-        masks = batch["mask"]
+        masks = batch["masks"]
 
-        fake_img, pred_mask = self(drrs, xrays)
+        output_tensors = self(drrs, xrays)
 
         gan_loss = self.cyclegan.loss()
         target_size = masks.shape[2:]
-        upsampled_logits = F.interpolate(
-            pred_mask.logits,
-            size=target_size,
-            mode="bilinear",
-            align_corners=False,  # Always set to False for segmentation upsampling
+        upsampled_logits = resample_logits(
+            output_tensors["segmentation"].logits, target_size
         )
         seg_loss = self.seg_loss(upsampled_logits, masks.long().squeeze(1))
         total_loss = gan_loss + seg_loss
-        return gan_loss, seg_loss, total_loss, fake_img
+        return gan_loss, seg_loss, total_loss, output_tensors
 
     def configure_optimizers(self):
         gan_params = self.cyclegan.parameters()
         seg_params = self.segmentation.parameters()
 
-        # 2. Combine the iterables of parameters into one list
-        # The '*' operator unpacks the iterables, but list concatenation is cleaner for parameter generators:
         all_params = list(gan_params) + list(seg_params)
         optimizer = torch.optim.Adam(all_params, lr=float(self.gan_lr))
         return optimizer

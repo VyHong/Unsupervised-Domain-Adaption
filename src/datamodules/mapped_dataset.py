@@ -3,11 +3,12 @@ from glob import glob
 from PIL import Image
 from torch.utils.data import Dataset
 
+
 class MappedDataset(Dataset):
     def __init__(self, drrs_dir, xrays_dir, masks_dir, transform=None):
-        self.drrs = sorted(glob(os.path.join(drrs_dir, '*')))
-        self.xrays = sorted(glob(os.path.join(xrays_dir, '*')))
-        self.masks = sorted(glob(os.path.join(masks_dir, '*')))
+        self.drrs = sorted(glob(os.path.join(drrs_dir, "*")))
+        self.xrays = sorted(glob(os.path.join(xrays_dir, "*")))
+        self.masks = sorted(glob(os.path.join(masks_dir, "*")))
         self.transform = transform
 
     def __len__(self):
@@ -21,4 +22,9 @@ class MappedDataset(Dataset):
             drr = self.transform(drr)
             xray = self.transform(xray)
             mask = self.transform(mask)
-        return {"drrs": drr,"xrays": xray, "mask": mask}
+
+        return {
+            "drrs": drr.to("cuda"),
+            "xrays": xray.to("cuda"),
+            "masks": mask.to("cuda"),
+        }

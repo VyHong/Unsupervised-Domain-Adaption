@@ -1,7 +1,8 @@
+from torchvision import transforms
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from ..datamodules.datamodule import DataModule
-from ..modules.module import Module
+from ..modules.cyclegan_segment_module import Module
 import yaml
 
 if __name__ == "__main__":
@@ -13,10 +14,18 @@ if __name__ == "__main__":
         cfg = yaml.safe_load(f)
     print(cfg)
 
+    transform = transforms.Compose(
+        [
+            transforms.Resize((256, 256)),
+            transforms.ToTensor(),
+        ]
+    )
+
     datamodule = DataModule(
         drrs_dir=cfg["data"]["drrs"],
         xrays_dir=cfg["data"]["xrays"],
         masks_dir=cfg["data"]["masks"],
+        transform=transform,
         batch_size=cfg["data"]["batch_size"],
         num_workers=cfg["data"]["num_workers"],
     )

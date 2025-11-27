@@ -8,7 +8,7 @@
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",
-            "module": "src.scripts.train",
+            "module": "src.scripts.test",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal"
         }
