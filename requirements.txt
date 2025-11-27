@@ -1,0 +1,34 @@
+# PyTorch
+torch
+torchvision
+torchaudio
+
+# Models
+transformers
+
+# Lightning
+pytorch-lightning
+lightning                 # optional CLI and util tools
+
+# Configs
+hydra-core
+omegaconf
+
+# Data science
+numpy
+pandas
+scikit-learn
+matplotlib
+
+# Logging / Metrics
+tensorboard
+wandb
+
+# Utilities
+tqdm
+pyyaml
+rich
+
+# Optional quality of life
+einops
+python-dotenv
