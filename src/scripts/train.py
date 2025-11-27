@@ -18,11 +18,11 @@ if __name__ == "__main__":
         xrays_dir=cfg["data"]["xrays"],
         masks_dir=cfg["data"]["masks"],
         batch_size=cfg["data"]["batch_size"],
-        num_workers=cfg["data"]["num_workers"]
+        num_workers=cfg["data"]["num_workers"],
     )
 
     # ----------------------------
-    # 2. Model 
+    # 2. Model
     # ----------------------------
     module = Module(cfg)
 
@@ -33,26 +33,25 @@ if __name__ == "__main__":
         monitor="val_total_loss",
         mode=cfg["checkpoint"]["mode"],
         save_top_k=cfg["checkpoint"]["save_top_k"],
-        filename=cfg["checkpoint"]["filename"]
+        filename=cfg["checkpoint"]["filename"],
     )
 
-    lr_monitor = LearningRateMonitor(logging_interval='step')
+    lr_monitor = LearningRateMonitor(logging_interval="step")
 
     # ----------------------------
     # 4. Trainer
     # ----------------------------
     trainer = pl.Trainer(
         accelerator=cfg["trainer"]["accelerator"],  # ensures GPU usage
-        devices=cfg["trainer"]["devices"],                   # number of GPUs
+        devices=cfg["trainer"]["devices"],  # number of GPUs
         max_epochs=cfg["trainer"]["max_epochs"],
-        precision=cfg["trainer"]["precision"],                # optional mixed precision for speed
+        precision=cfg["trainer"]["precision"],  # optional mixed precision for speed
         callbacks=[checkpoint_callback, lr_monitor],
-        log_every_n_steps= cfg["trainer"]["log_every_n_steps"],
-        check_val_every_n_epoch=cfg["trainer"]["val_check_interval"]
+        log_every_n_steps=cfg["trainer"]["log_every_n_steps"],
+        check_val_every_n_epoch=cfg["trainer"]["check_val_every_n_epoch"],
     )
 
     # ----------------------------
     # 5. Fit
     # ----------------------------
     trainer.fit(module, datamodule)
-
