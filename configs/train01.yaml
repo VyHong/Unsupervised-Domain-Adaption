@@ -41,6 +41,7 @@ cyclegan:
   gan_mode: lsgan
   direction: AtoB
   device: cuda
+  num_labels: 2
 
 # Segmentation hyperparameters
 segmodel:

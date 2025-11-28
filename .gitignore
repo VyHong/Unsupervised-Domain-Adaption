@@ -1,3 +1,5 @@
 .venv
 wandb
 lightning_logs
+visualization
+.secrets

@@ -3,6 +3,7 @@ from .mapped_dataset import MappedDataset
 from .cached_dataset import CachedMappedDataset
 from torch.utils.data import DataLoader
 from torchvision import transforms
+from src.utils.functions import normalize_path_for_os
 import pytorch_lightning as pl
 
 
@@ -17,9 +18,9 @@ class DataModule(pl.LightningDataModule):
         num_workers=4,
     ):
         super().__init__()
-        self.drrs_dir = drrs_dir
-        self.xrays_dir = xrays_dir
-        self.masks_dir = masks_dir
+        self.drrs_dir = normalize_path_for_os(drrs_dir)
+        self.xrays_dir = normalize_path_for_os(xrays_dir)
+        self.masks_dir = normalize_path_for_os(masks_dir)
         self.batch_size = batch_size
         self.num_workers = num_workers
 
