@@ -1,9 +1,9 @@
 # Data paths
 data:
-  drrs: "/home/vy/welsh_dragon/xray"
-  xrays: "/home/vy/welsh_dragon/drr"
-  masks: "/home/vy/welsh_dragon/masks"
-  batch_size: 2
+  drrs: "/home/vy/project/data/xray"
+  xrays: "/home/vy/project/data/drr"
+  masks: "/home/vy/project/data/masks"
+  batch_size: 5
   num_workers: 4
 
 # Training

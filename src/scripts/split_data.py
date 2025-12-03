@@ -80,7 +80,7 @@ def split_data(source_dir, dest_dir, train_ratio, val_ratio, test_ratio):
         for file_path in file_list:
             file_name = os.path.basename(file_path)
             # shutil.move moves the file from the source to the destination path
-            shutil.move(file_path, os.path.join(dest_path, file_name))
+            shutil.copy2(file_path, os.path.join(dest_path, file_name))
 
     print("\n✅ Data splitting complete!")
     print(

@@ -22,7 +22,10 @@ class CachedMappedDataset(Dataset):
 
         # Ensure all sets have the same length
         if not (len(drr_paths) == len(xray_paths) == len(mask_paths)):
-            raise ValueError("The number of DRR, X-ray, and Mask files must be equal.")
+            raise ValueError(
+                "The number of DRR, X-ray, and Mask files must be equal."
+                + f" Found {len(drr_paths)} DRRs, {len(xray_paths)} X-rays, {len(mask_paths)} Masks."
+            )
 
         self.length = len(drr_paths)
         self.transform = transform
