@@ -35,20 +35,20 @@ class DataModule(pl.LightningDataModule):
 
     def setup(self, stage=None):
         if stage == "fit":
-            self.train_dataset = CachedMappedDataset(
+            self.train_dataset = MappedDataset(
                 os.path.join(self.drrs_dir, "train"),
                 os.path.join(self.xrays_dir, "train"),
                 os.path.join(self.masks_dir, "train"),
                 transform=self.transform,
             )
-            self.val_dataset = CachedMappedDataset(
+            self.val_dataset = MappedDataset(
                 os.path.join(self.drrs_dir, "val"),
                 os.path.join(self.xrays_dir, "val"),
                 os.path.join(self.masks_dir, "val"),
                 transform=self.transform,
             )
         if stage == "test":
-            self.dataset = CachedMappedDataset(
+            self.dataset = MappedDataset(
                 os.path.join(self.drrs_dir, "test"),
                 os.path.join(self.xrays_dir, "test"),
                 os.path.join(self.masks_dir, "test"),

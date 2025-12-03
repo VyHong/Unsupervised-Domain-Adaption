@@ -2,7 +2,7 @@
 data:
   drrs: "/home/vy/project/data/xray"
   xrays: "/home/vy/project/data/drr"
-  masks: "/home/vy/project/data/masks"
+  masks: "/home/vy/project/data/mask"
   batch_size: 5
   num_workers: 4
 
