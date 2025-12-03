@@ -1,0 +1,62 @@
+# Data paths
+data:
+  drrs: "/home/vy/welsh_dragon/xray"
+  xrays: "/home/vy/welsh_dragon/drr"
+  masks: "/home/vy/welsh_dragon/masks"
+  batch_size: 2
+  num_workers: 4
+
+# Training
+trainer:
+  max_epochs: 100
+  precision: 16
+  accelerator: "gpu"
+  devices: 1
+  log_every_n_steps: 1
+  check_val_every_n_epoch: 10
+  val_check_interval: 0.5
+
+#CycleGAN hyperparameters
+cyclegan:
+  lr: 2e-4
+
+  isTrain: True
+  lambda_cycle: 10.0
+  lambda_A: 10
+  lambda_B: 10
+  lambda_identity: 0.5
+  model: "cycle_gan"
+  input_nc: 3 # Number of input image channels (e.g., 3 for RGB)
+  output_nc: 3 # Number of output image channels
+  ngf: 64 # Number of generator filters in the last conv layer
+  ndf: 64 # Number of discriminator filters in the first conv layer
+  netG: "resnet_9blocks" # Generator architecture
+  netD: "basic" # Discriminator architecture (70x70 PatchGAN)
+  n_layers_D: 3 # Number of layers in discriminator (if netD==n_layers)
+  norm: "instance" # Normalization type [instance | batch]
+  no_dropout: False # Whether to use dropout in the generator (False means dropout is used)
+  init_type: "normal" # Network initialization method
+  init_gain: 0.02 # Scaling factor for initialization
+  pool_size: 50
+  gan_mode: lsgan
+  direction: AtoB
+  device: cuda
+  num_labels: 2
+
+# Segmentation hyperparameters
+segmodel:
+  lr: 2e-4
+  name: "nvidia/segformer-b0-finetuned-ade-512-512"
+  num_labels: 2
+
+# Loss weighting
+loss_weights:
+  gan: 1.0
+  seg: 5.0
+
+# Checkpoints / logging
+checkpoint:
+  monitor: "val_total_loss"
+  save_top_k: 3
+  mode: "min"
+  filename: "{epoch:02d}-{val_total_loss:.4f}"

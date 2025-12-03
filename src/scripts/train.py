@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     transform = transforms.Compose(
         [
-            transforms.Resize((1024, 1024)),
+            transforms.Resize((512, 512)),
             transforms.ToTensor(),
         ]
     )
