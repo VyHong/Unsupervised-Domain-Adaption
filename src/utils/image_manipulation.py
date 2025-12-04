@@ -16,19 +16,36 @@ def resample_logits(tensor, target_size):
 
 
 def save_visualization(grid, save_path):
-    for i, image in enumerate(grid):
-        if image.shape[0] == 1:
-            # Use repeat_interleave to copy the single channel 3 times
-            # This transforms [1, 512, 512] to [3, 512, 512]
-            grayscale_rgb = image.repeat_interleave(3, dim=0)
-            grid[i] = grayscale_rgb
+    prepared = []
+    for image in grid:
+        img = image
+        # Move to cpu and ensure float
+        img = img.detach().cpu().float()
 
-    image_grid = vutils.make_grid(
-        grid,
-        nrow=len(grid),  # Sets the number of columns to 4
-        normalize=True,  # Important: Scales [-1, 1] images and [0, N] masks to [0, 1]
-        scale_each=True,  # Ensures each tensor (image or mask) is scaled independently
-    )
+        # If single-channel, convert to 3 channels
+        if img.ndim == 3 and img.shape[0] == 1:
+            img = img.repeat_interleave(3, dim=0)
+
+        # If image values look like they're in [-1, 1], rescale to [0, 1]
+        try:
+            minv = float(img.min())
+            maxv = float(img.max())
+        except Exception:
+            minv, maxv = 0.0, 1.0
+
+        if minv < 0.0 or maxv > 1.0:
+            # Common case: model outputs in [-1, 1]
+            if minv >= -1.0 - 1e-3 and maxv <= 1.0 + 1e-3:
+                img = (img + 1.0) / 2.0
+            else:
+                # Otherwise clamp to [0,1]
+                img = img.clamp(0.0, 1.0)
+
+        prepared.append(img)
+
+    # Do NOT normalize here: normalization would change the colors of colorized
+    # segmentation maps. We assume items in `prepared` are already in [0,1].
+    image_grid = vutils.make_grid(prepared, nrow=len(prepared), normalize=False)
     vutils.save_image(image_grid, save_path)
 
 
