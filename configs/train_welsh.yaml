@@ -5,6 +5,8 @@ data:
   test: "/home/vy/project/data/test"
   batch_size: 4
   num_workers: 4
+  image_size_0: 512
+  image_size_1: 512
 
 # Training
 trainer:

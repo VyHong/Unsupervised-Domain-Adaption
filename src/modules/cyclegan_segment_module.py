@@ -6,9 +6,9 @@ from src.models.cyclegan.cyclegan import CycleGANModel
 from src.models.hf_segmentation_wrapper import get_hf_model
 import wandb
 from src.utils.image_manipulation import (
+    logits_to_rgb,
     resample_logits,
     save_visualization,
-    colorize_segmentation,
 )
 from ..utils.config_object import dict_to_simple_object
 
@@ -88,7 +88,7 @@ class Module(pl.LightningModule):
                 output_tensors["fake_xray"][0],
                 output_tensors["rec_drr"][0],
                 masks[0],
-                colorize_segmentation(seg, self.segmentation.config.num_labels),
+                logits_to_rgb(seg, self.segmentation.config.num_labels),
             ]
             os.makedirs(os.path.join(self.logger.log_dir, "images"), exist_ok=True)
             save_visualization(
@@ -144,7 +144,7 @@ class Module(pl.LightningModule):
         upsampled_logits = resample_logits(
             output_tensors["segmentation"].logits, target_size
         )
-        output_tensors["pred_masks"] = upsampled_logits.argmax(dim=1, keepdim=True)
+        output_tensors["pred_masks"] = upsampled_logits
         seg_loss = self.seg_loss(upsampled_logits, masks.long().squeeze(1))
         total_loss = gan_loss + seg_loss
         return gan_loss, seg_loss, total_loss, output_tensors
