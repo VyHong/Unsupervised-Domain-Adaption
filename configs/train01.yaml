@@ -10,7 +10,7 @@ data:
 
 # Training
 trainer:
-  max_epochs: 100
+  max_epochs: 200
   precision: 16
   accelerator: "gpu"
   devices: 1
@@ -20,7 +20,7 @@ trainer:
 
 #CycleGAN hyperparameters
 cyclegan:
-  lr: 2e-4
+  lr: 1e-4
 
   isTrain: True
   lambda_cycle: 10.0

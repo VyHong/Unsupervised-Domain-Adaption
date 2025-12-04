@@ -9,7 +9,7 @@ def resample_logits(tensor, target_size):
     resampled_logits = F.interpolate(
         tensor,
         size=target_size,
-        mode="bilinear",
+        mode="nearest",
         align_corners=False,  # Always set to False for segmentation upsampling
     )
     return resampled_logits
