@@ -128,13 +128,13 @@ def split_segmentation_data(
 
     # 5. Define and Create Destination Folders
     for split_name in split_ids.keys():
-        os.makedirs(os.path.join(dest_dir, split_name, "Images"), exist_ok=True)
-        os.makedirs(os.path.join(dest_dir, split_name, "Masks"), exist_ok=True)
+        os.makedirs(os.path.join(dest_dir, split_name, "xray"), exist_ok=True)
+        os.makedirs(os.path.join(dest_dir, split_name, "mask"), exist_ok=True)
 
     # 6. Copy the Paired Files
     for split_name, case_ids in split_ids.items():
-        dest_img_path = os.path.join(dest_dir, split_name, "Images")
-        dest_mask_path = os.path.join(dest_dir, split_name, "Masks")
+        dest_img_path = os.path.join(dest_dir, split_name, "xray")
+        dest_mask_path = os.path.join(dest_dir, split_name, "mask")
 
         print(f"\nCopying {len(case_ids)} samples to {split_name}...")
 
