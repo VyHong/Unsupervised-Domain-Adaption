@@ -10,17 +10,17 @@ import pytorch_lightning as pl
 class DataModule(pl.LightningDataModule):
     def __init__(
         self,
-        drrs_dir,
-        xrays_dir,
-        masks_dir,
+        trains_dir,
+        vals_dir,
+        tests_dir,
         transform=None,
         batch_size=4,
         num_workers=4,
     ):
         super().__init__()
-        self.drrs_dir = normalize_path_for_os(drrs_dir)
-        self.xrays_dir = normalize_path_for_os(xrays_dir)
-        self.masks_dir = normalize_path_for_os(masks_dir)
+        self.trains_dir = normalize_path_for_os(trains_dir)
+        self.vals_dir = normalize_path_for_os(vals_dir)
+        self.tests_dir = normalize_path_for_os(tests_dir)
         self.batch_size = batch_size
         self.num_workers = num_workers
 
@@ -36,22 +36,22 @@ class DataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         if stage == "fit":
             self.train_dataset = MappedDataset(
-                os.path.join(self.drrs_dir, "drr"),
-                os.path.join(self.xrays_dir, "xray"),
-                os.path.join(self.masks_dir, "mask"),
+                os.path.join(self.trains_dir, "drr"),
+                os.path.join(self.vals_dir, "xray"),
+                os.path.join(self.tests_dir, "mask"),
                 transform=self.transform,
             )
             self.val_dataset = MappedDataset(
-                os.path.join(self.drrs_dir, "drr"),
-                os.path.join(self.xrays_dir, "xray"),
-                os.path.join(self.masks_dir, "mask"),
+                os.path.join(self.trains_dir, "drr"),
+                os.path.join(self.vals_dir, "xray"),
+                os.path.join(self.tests_dir, "mask"),
                 transform=self.transform,
             )
         if stage == "test":
             self.dataset = MappedDataset(
-                os.path.join(self.drrs_dir, "drr"),
-                os.path.join(self.xrays_dir, "xray"),
-                os.path.join(self.masks_dir, "mask"),
+                os.path.join(self.trains_dir, "drr"),
+                os.path.join(self.vals_dir, "xray"),
+                os.path.join(self.tests_dir, "mask"),
                 transform=self.transform,
             )
 
