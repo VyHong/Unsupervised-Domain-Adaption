@@ -1,9 +1,9 @@
 # Data paths
 data:
-  drrs: "/home/vy/project/data/xray"
-  xrays: "/home/vy/project/data/drr"
-  masks: "/home/vy/project/data/mask"
-  batch_size: 5
+  train: "/home/vy/project/data/train"
+  val: "/home/vy/project/data/val"
+  test: "/home/vy/project/data/test"
+  batch_size: 4
   num_workers: 4
 
 # Training
@@ -13,7 +13,7 @@ trainer:
   accelerator: "gpu"
   devices: 1
   log_every_n_steps: 1
-  check_val_every_n_epoch: 10
+  check_val_every_n_epoch: 1
   val_check_interval: 0.5
 
 #CycleGAN hyperparameters
@@ -24,7 +24,7 @@ cyclegan:
   lambda_cycle: 10.0
   lambda_A: 10
   lambda_B: 10
-  lambda_identity: 0.5
+  lambda_identity: 50
   model: "cycle_gan"
   input_nc: 3 # Number of input image channels (e.g., 3 for RGB)
   output_nc: 3 # Number of output image channels
@@ -52,7 +52,7 @@ segmodel:
 # Loss weighting
 loss_weights:
   gan: 1.0
-  seg: 5.0
+  seg: 10.0
 
 # Checkpoints / logging
 checkpoint:

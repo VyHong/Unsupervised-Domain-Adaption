@@ -1,20 +1,48 @@
 import os
 import shutil
-import random
 import argparse
 from glob import glob
+from sklearn.model_selection import (
+    train_test_split,
+)  # Used for reliable shuffle and split
 
 # --- Configuration ---
-TRAIN_RATIO = 0.70  # 70% for training
-VAL_RATIO = 0.15  # 15% for validation
-TEST_RATIO = 0.15  # 15% for testing (Note: Ratios must sum to 1.0)
+TRAIN_RATIO = 0.80  # 80% for training
+VAL_RATIO = 0.10  # 10% for validation
+TEST_RATIO = 0.10  # 10% for testing (Note: Ratios must sum to 1.0)
+RANDOM_STATE = 42  # Seed for reproducibility of shuffle/split
 # ---------------------
 
 
-def split_data(source_dir, dest_dir, train_ratio, val_ratio, test_ratio):
+def get_case_id(filename):
     """
-    Splits all files from the source directory and moves them into train,
-    val, and test folders created inside the destination directory.
+    Extracts the unique case ID from the file name.
+
+    Examples:
+    - '167_xrayimage_view_2.png' -> '167_view_2'
+    - '171_semantic_label_view_2.png' -> '171_view_2'
+    """
+    base = os.path.basename(filename).replace(".png", "")  # Remove extension
+
+    # Split by underscore
+    parts = base.split("_")
+
+    if len(parts) >= 3:
+        # Assumes structure is ID_type_view_ID/ID_type_view_ID
+        # We want to capture the initial ID and the view part: '167_view_2'
+        case_id = f"{parts[0]}_{parts[-2]}_{parts[-1]}"
+        return case_id.replace("view_", "view")  # Clean up if needed
+
+    # Fallback for unexpected naming, using the whole base name
+    return base
+
+
+def split_segmentation_data(
+    xray_dir, mask_dir, dest_dir, train_ratio, val_ratio, test_ratio
+):
+    """
+    Splits paired X-ray and Mask files based on unique case IDs and copies them
+    into the standard train/val/test structure.
     """
     # 1. Check Ratios
     if abs(train_ratio + val_ratio + test_ratio - 1.0) > 1e-6:
@@ -22,89 +50,139 @@ def split_data(source_dir, dest_dir, train_ratio, val_ratio, test_ratio):
         return
 
     print(
-        f"--- Starting Data Split ({train_ratio*100:.0f}%/{val_ratio*100:.0f}%/{test_ratio*100:.0f}%) ---"
+        f"--- Starting Segmentation Data Split ({train_ratio*100:.0f}%/{val_ratio*100:.0f}%/{test_ratio*100:.0f}%) ---"
     )
-    print(f"Source: {source_dir}")
-    print(f"Destination: {dest_dir}")
+    print(f"X-ray Source: {xray_dir}")
+    print(f"Mask Source: {mask_dir}")
+    print(f"Destination Root: {dest_dir}")
 
-    # 2. Get all file paths
-    # We find all files in the source directory (excluding subdirectories)
-    # The absolute path ensures shutil.move works reliably
-    all_files = [
-        os.path.abspath(f)
-        for f in glob(os.path.join(source_dir, "*"))
-        if os.path.isfile(f)
-    ]
+    # 2. Collect all X-ray file paths
+    all_xray_paths = sorted(
+        glob(os.path.join(xray_dir, "*.png"))
+    )  # Use *.png or appropriate extension
 
-    if not all_files:
-        print(f"Error: No files found in the source directory: {source_dir}")
+    if not all_xray_paths:
+        print(f"Error: No X-ray files found in {xray_dir}")
         return
 
-    print(f"Found {len(all_files)} files to split.")
+    # 3. Map Case IDs to full paths
+    # We use a dictionary to store all paths based on their extracted ID
+    xray_id_to_path = {get_case_id(p): p for p in all_xray_paths}
 
-    # 3. Shuffle the list of files randomly
-    random.shuffle(all_files)
+    # Check for corresponding mask
+    unique_ids = list(xray_id_to_path.keys())
+    paired_ids = []
 
-    # 4. Calculate split indices
-    total_count = len(all_files)
-    train_end = int(total_count * train_ratio)
-    val_end = train_end + int(total_count * val_ratio)
+    for case_id in unique_ids:
+        # Infer mask filename pattern based on the X-ray file's pattern
+        # This requires some knowledge of the naming convention logic:
+        # 167_xrayimage_view_2.png <-> 167_semantic_label_view_2.png
+        xray_path = xray_id_to_path[case_id]
+        xray_filename = os.path.basename(xray_path)
 
-    # Ensure all files are included, accounting for rounding
-    train_files = all_files[:train_end]
-    val_files = all_files[train_end:val_end]
-    test_files = all_files[val_end:]
+        # We need to construct the corresponding mask filename.
+        # This is a critical step depending on your exact naming.
+        # Assuming only the middle part changes:
+        mask_filename = xray_filename.replace("xrayimage", "semantic_label")
+
+        mask_path = os.path.join(mask_dir, mask_filename)
+
+        if os.path.exists(mask_path):
+            # If a matching mask is found, we keep this ID for the split
+            paired_ids.append(case_id)
+        else:
+            print(f"Warning: No matching mask found for X-ray ID: {case_id}. Skipping.")
+
+    if not paired_ids:
+        print("Error: No paired X-ray/Mask samples found to split.")
+        return
+
+    print(f"Found {len(paired_ids)} unique, paired samples to split.")
+
+    # 4. Shuffle and Split the paired IDs (This is the core step!)
+
+    # Split into initial train set and a temporary remaining set (val + test)
+    train_ids, remaining_ids = train_test_split(
+        paired_ids,
+        test_size=(VAL_RATIO + TEST_RATIO),
+        shuffle=True,  # Perform initial shuffle
+        random_state=RANDOM_STATE,
+    )
+
+    # Calculate the new ratio for val/test split from the remaining set
+    val_test_ratio = VAL_RATIO / (VAL_RATIO + TEST_RATIO)
+
+    # Split the remaining set into validation and test
+    val_ids, test_ids = train_test_split(
+        remaining_ids,
+        test_size=(1 - val_test_ratio),
+        shuffle=False,  # No need to shuffle again
+        random_state=RANDOM_STATE,
+    )
+
+    split_ids = {"train": train_ids, "val": val_ids, "test": test_ids}
 
     print(
-        f"Split counts: Train={len(train_files)}, Validation={len(val_files)}, Test={len(test_files)}"
+        f"Split counts: Train={len(train_ids)}, Validation={len(val_ids)}, Test={len(test_ids)}"
     )
 
     # 5. Define and Create Destination Folders
-    sets = {"train": train_files, "val": val_files, "test": test_files}
+    for split_name in split_ids.keys():
+        os.makedirs(os.path.join(dest_dir, split_name, "Images"), exist_ok=True)
+        os.makedirs(os.path.join(dest_dir, split_name, "Masks"), exist_ok=True)
 
-    # Create the top-level destination directory if needed
-    os.makedirs(dest_dir, exist_ok=True)
+    # 6. Copy the Paired Files
+    for split_name, case_ids in split_ids.items():
+        dest_img_path = os.path.join(dest_dir, split_name, "Images")
+        dest_mask_path = os.path.join(dest_dir, split_name, "Masks")
 
-    # Create the train/val/test subdirectories
-    for folder in sets.keys():
-        dest_folder = os.path.join(dest_dir, folder)
-        os.makedirs(dest_folder, exist_ok=True)
+        print(f"\nCopying {len(case_ids)} samples to {split_name}...")
 
-    # 6. Move the files
-    for folder_name, file_list in sets.items():
-        dest_path = os.path.join(dest_dir, folder_name)
-        print(
-            f"Moving {len(file_list)} files to {os.path.basename(dest_dir)}/{folder_name}/..."
-        )
+        for case_id in case_ids:
+            xray_path = xray_id_to_path[case_id]
 
-        for file_path in file_list:
-            file_name = os.path.basename(file_path)
-            # shutil.move moves the file from the source to the destination path
-            shutil.copy2(file_path, os.path.join(dest_path, file_name))
+            # Re-derive the mask filename based on the stored X-ray path
+            xray_filename = os.path.basename(xray_path)
+            mask_filename = xray_filename.replace("xrayimage", "semantic_label")
+            mask_path = os.path.join(mask_dir, mask_filename)
 
-    print("\n✅ Data splitting complete!")
+            # Copy X-ray (Image)
+            shutil.copy2(xray_path, os.path.join(dest_img_path, xray_filename))
+            # Copy Mask
+            shutil.copy2(mask_path, os.path.join(dest_mask_path, mask_filename))
+
+    print("\n✅ Segmentation Data splitting complete!")
     print(
-        f"Data has been moved from '{os.path.basename(source_dir)}' to '{os.path.basename(dest_dir)}'."
+        f"Data has been saved to '{dest_dir}' with the structure: /Train/Images, /Train/Masks, etc."
     )
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Randomly splits files from a source directory into train, val, and test folders in a specified destination directory."
+        description="Randomly splits paired X-ray and Mask files into train, val, and test folders based on unique case IDs."
     )
 
     parser.add_argument(
-        "source_dir",
+        "xray_dir",
         type=str,
-        help="The absolute path to the directory containing the source data (e.g., /home/user/data/raw).",
+        help="The path to the directory containing all X-ray images.",
+    )
+
+    parser.add_argument(
+        "mask_dir",
+        type=str,
+        help="The path to the directory containing all corresponding Mask files.",
     )
 
     parser.add_argument(
         "dest_dir",
         type=str,
-        help="The absolute path to the directory where the 'train', 'val', and 'test' folders will be created (e.g., /home/user/data/split).",
+        help="The path to the directory where the 'train', 'val', and 'test' folders will be created.",
     )
 
     args = parser.parse_args()
 
-    split_data(args.source_dir, args.dest_dir, TRAIN_RATIO, VAL_RATIO, TEST_RATIO)
+    # You must install scikit-learn for this to work: pip install scikit-learn
+    split_segmentation_data(
+        args.xray_dir, args.mask_dir, args.dest_dir, TRAIN_RATIO, VAL_RATIO, TEST_RATIO
+    )
