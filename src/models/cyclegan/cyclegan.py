@@ -138,6 +138,7 @@ class CycleGANModel(nn.Module):
     def get_images(self):
 
         images = {
+            "real_drr": self.real_A,
             "fake_xray": self.fake_B * 0.5 + 0.5,
             "fake_drr": self.fake_A * 0.5 + 0.5,
             "rec_drr": self.rec_A * 0.5 + 0.5,

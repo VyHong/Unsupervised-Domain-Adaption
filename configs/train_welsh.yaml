@@ -24,9 +24,9 @@ cyclegan:
 
   isTrain: True
   lambda_cycle: 10.0
-  lambda_A: 10
-  lambda_B: 10
-  lambda_identity: 50
+  lambda_A: 1
+  lambda_B: 1
+  lambda_identity: 10
   model: "cycle_gan"
   input_nc: 3 # Number of input image channels (e.g., 3 for RGB)
   output_nc: 3 # Number of output image channels
