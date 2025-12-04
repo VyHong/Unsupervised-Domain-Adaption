@@ -1,10 +1,10 @@
 # Data paths
 data:
-  drrs: "./data/drrs"
-  xrays: "./data/xrays"
-  masks: "./data/masks"
+  train: "./data/train"
+  val: "./data/val"
+  test: "./data/test"
   batch_size: 2
-  num_workers: 4
+  num_workers: 1
 
 # Training
 trainer:

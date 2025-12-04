@@ -37,20 +37,21 @@ class DataModule(pl.LightningDataModule):
         if stage == "fit":
             self.train_dataset = MappedDataset(
                 os.path.join(self.trains_dir, "drr"),
-                os.path.join(self.vals_dir, "xray"),
-                os.path.join(self.tests_dir, "mask"),
+                os.path.join(self.trains_dir, "xray"),
+                os.path.join(self.trains_dir, "mask"),
                 transform=self.transform,
             )
             self.val_dataset = MappedDataset(
-                os.path.join(self.trains_dir, "drr"),
+                os.path.join(self.vals_dir, "drr"),
                 os.path.join(self.vals_dir, "xray"),
-                os.path.join(self.tests_dir, "mask"),
+                os.path.join(self.vals_dir, "mask"),
                 transform=self.transform,
             )
+            print(len(self.train_dataset), len(self.val_dataset))
         if stage == "test":
             self.dataset = MappedDataset(
-                os.path.join(self.trains_dir, "drr"),
-                os.path.join(self.vals_dir, "xray"),
+                os.path.join(self.tests_dir, "drr"),
+                os.path.join(self.tests_dir, "xray"),
                 os.path.join(self.tests_dir, "mask"),
                 transform=self.transform,
             )
@@ -64,12 +65,14 @@ class DataModule(pl.LightningDataModule):
         )
 
     def val_dataloader(self):
-        return DataLoader(
+        loader = DataLoader(
             self.val_dataset,
             batch_size=self.batch_size,
             shuffle=False,
             num_workers=self.num_workers,
         )
+        print(len(loader))
+        return loader
 
     def test_dataloader(self):
         # Prefer an explicit test dataset; otherwise reuse the validation dataset
