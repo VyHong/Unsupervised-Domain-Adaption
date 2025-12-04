@@ -41,7 +41,7 @@ class Module(pl.LightningModule):
         self.cyclegan.set_input(input_images)
         self.cyclegan.forward()
         images = self.cyclegan.get_images()  # generate synthetic image
-        fake_features = self.seg_extractor(images["real_drr"], return_tensors="pt")
+        fake_features = self.seg_extractor(images["fake_xray"], return_tensors="pt")
         for k in fake_features:
             fake_features[k] = fake_features[k].to(device="cuda", dtype=torch.float16)
 
