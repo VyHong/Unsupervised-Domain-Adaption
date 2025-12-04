@@ -20,7 +20,7 @@ trainer:
 
 #CycleGAN hyperparameters
 cyclegan:
-  lr: 2e-4
+  lr: 5e-3
 
   isTrain: True
   lambda_cycle: 10.0
