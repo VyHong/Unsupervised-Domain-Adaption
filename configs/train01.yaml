@@ -53,8 +53,8 @@ segmodel:
 
 # Loss weighting
 loss_weights:
-  gan: 1.0
-  seg: 5.0
+  gan: 0.0
+  seg: 1.0
 
 # Checkpoints / logging
 checkpoint:
