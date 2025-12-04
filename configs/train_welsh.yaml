@@ -48,13 +48,13 @@ cyclegan:
 # Segmentation hyperparameters
 segmodel:
   lr: 2e-4
-  name: "nvidia/segformer-b0-finetuned-ade-512-512"
+  name: "nvidia/mit-b0"
   num_labels: 2
 
 # Loss weighting
 loss_weights:
-  gan: 1.0
-  seg: 10.0
+  gan: 0.5
+  seg: 1.0
 
 # Checkpoints / logging
 checkpoint:

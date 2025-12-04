@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # 1. Data
     # ----------------------------
 
-    with open("configs/train01.yaml", "r") as f:
+    with open("configs/train_welsh.yaml", "r") as f:
         cfg = yaml.safe_load(f)
     print(cfg)
 

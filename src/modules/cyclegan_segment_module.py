@@ -29,6 +29,7 @@ class Module(pl.LightningModule):
         self.gan_lr = cfg["cyclegan"]["lr"]
         self.seg_lr = cfg["segmodel"]["lr"]
 
+        self.cfg = cfg
         self.seg_loss = nn.CrossEntropyLoss()
         if opt.isTrain:
             self.run = wandb.init(
@@ -146,7 +147,11 @@ class Module(pl.LightningModule):
         )
         output_tensors["pred_masks"] = upsampled_logits
         seg_loss = self.seg_loss(upsampled_logits, masks.long().squeeze(1))
-        total_loss = gan_loss + seg_loss
+
+        total_loss = (
+            self.cfg["loss_weights"]["gan"] * gan_loss
+            + self.cfg["loss_weights"]["seg"] * seg_loss
+        )
         return gan_loss, seg_loss, total_loss, output_tensors
 
     def configure_optimizers(self):
