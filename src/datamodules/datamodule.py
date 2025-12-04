@@ -36,14 +36,14 @@ class DataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         if stage == "fit":
             self.train_dataset = MappedDataset(
-                os.path.join(self.trains_dir, "drr"),
                 os.path.join(self.trains_dir, "xray"),
+                os.path.join(self.trains_dir, "drr"),
                 os.path.join(self.trains_dir, "mask"),
                 transform=self.transform,
             )
             self.val_dataset = MappedDataset(
-                os.path.join(self.vals_dir, "drr"),
                 os.path.join(self.vals_dir, "xray"),
+                os.path.join(self.vals_dir, "drr"),
                 os.path.join(self.vals_dir, "mask"),
                 transform=self.transform,
             )
