@@ -27,9 +27,9 @@ if __name__ == "__main__":
     )
     # Instantiate the project's DataModule and prepare the test dataloader
     datamodule = DataModule(
-        drrs_dir=cfg["data"]["drrs"],
-        xrays_dir=cfg["data"]["xrays"],
-        masks_dir=cfg["data"]["masks"],
+        trains_dir=cfg["data"]["train"],
+        vals_dir=cfg["data"]["val"],
+        tests_dir=cfg["data"]["test"],
         transform=transform,
         batch_size=cfg["data"]["batch_size"],
         num_workers=cfg["data"]["num_workers"],
