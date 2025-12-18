@@ -54,30 +54,36 @@ class Module(pl.LightningModule):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
+        current_lr = self.optimizer.param_groups[0]["lr"]
         log_dict = {
             "train_gan_loss": gan_loss,
             "train_seg_loss": seg_loss,
             "train_total_loss": total_loss,
+            "lr": current_lr,
         }
         self.run.log(log_dict)
         self.log("train_gan_loss", gan_loss)
         self.log("train_seg_loss", seg_loss)
         self.log("train_total_loss", total_loss)
+        self.log("lr", current_lr)
         return total_loss
 
     def validation_step(self, batch, batch_idx):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
+        current_lr = self.optimizer.param_groups[0]["lr"]
         log_dict = {
             "val_gan_loss": gan_loss,
             "val_seg_loss": seg_loss,
             "val_total_loss": total_loss,
+            "lr": current_lr,
         }
         self.run.log(log_dict)
         self.log("val_gan_loss", gan_loss, prog_bar=True, on_epoch=True)
         self.log("val_seg_loss", seg_loss, prog_bar=True, on_epoch=True)
         self.log("val_total_loss", total_loss, prog_bar=True, on_epoch=True)
+        self.log("lr", current_lr)
 
         if batch_idx == 0:
             drrs = batch["drrs"]
@@ -121,15 +127,18 @@ class Module(pl.LightningModule):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
+        current_lr = self.optimizer.param_groups[0]["lr"]
         log_dict = {
             "test_gan_loss": gan_loss,
             "test_seg_loss": seg_loss,
             "test_total_loss": total_loss,
+            "lr": current_lr,
         }
         self.run.log(log_dict)
         self.log("test_gan_loss", gan_loss, prog_bar=True, on_epoch=True)
         self.log("test_seg_loss", seg_loss, prog_bar=True, on_epoch=True)
         self.log("test_total_loss", total_loss, prog_bar=True, on_epoch=True)
+        self.log("lr", current_lr)
 
         return total_loss
 
@@ -160,6 +169,7 @@ class Module(pl.LightningModule):
 
         all_params = list(gan_params) + list(seg_params)
         optimizer = torch.optim.AdamW(all_params, lr=float(self.gan_lr))
+        self.optimizer = optimizer
 
         # Check if scheduler is enabled in config
         if self.cfg.get("scheduler", {}).get("enabled", False):
