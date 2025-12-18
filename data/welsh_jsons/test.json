@@ -1,0 +1,502 @@
+[
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/297_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/297_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/297_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/54_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/54_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/54_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/256_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/256_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/256_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/127_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/127_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/127_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/490_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/490_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/490_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/295_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/295_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/295_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/344_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/344_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/344_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/262_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/262_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/262_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/319_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/319_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/319_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/224_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/224_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/224_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/399_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/399_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/399_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/26_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/26_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/26_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/400_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/400_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/400_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/365_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/365_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/365_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/25_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/25_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/25_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/216_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/216_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/216_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/378_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/378_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/378_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/8_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/8_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/8_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/223_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/223_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/223_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/131_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/131_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/131_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/206_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/206_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/206_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/226_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/226_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/226_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/470_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/470_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/470_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/199_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/199_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/199_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/411_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/411_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/411_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/233_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/233_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/233_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/243_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/243_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/243_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/490_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/490_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/490_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/351_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/351_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/351_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/219_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/219_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/219_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/161_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/161_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/161_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/442_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/442_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/442_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/113_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/113_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/113_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/22_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/22_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/22_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/38_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/38_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/38_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/386_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/386_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/386_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/124_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/124_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/124_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/197_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/197_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/197_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/48_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/48_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/48_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/394_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/394_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/394_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/238_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/238_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/238_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/194_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/194_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/194_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/55_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/55_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/55_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/195_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/195_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/195_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/420_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/420_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/420_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/284_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/284_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/284_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/76_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/76_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/76_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/243_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/243_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/243_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/226_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/226_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/226_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/9_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/9_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/9_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/139_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/139_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/139_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/95_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/95_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/95_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/405_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/405_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/405_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/362_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/362_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/362_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/90_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/90_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/90_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/433_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/433_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/433_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/11_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/11_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/11_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/128_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/128_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/128_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/14_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/14_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/14_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/444_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/444_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/444_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/23_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/23_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/23_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/13_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/13_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/13_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/162_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/162_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/162_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/387_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/387_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/387_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/18_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/18_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/18_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/232_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/232_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/232_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/240_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/240_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/240_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/437_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/437_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/437_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/272_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/272_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/272_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/154_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/154_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/154_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/496_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/496_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/496_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/2_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/2_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/2_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/392_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/392_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/392_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/143_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/143_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/143_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/340_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/340_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/340_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/468_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/468_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/468_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/145_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/145_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/145_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/132_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/132_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/132_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/422_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/422_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/422_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/470_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/470_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/470_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/433_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/433_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/433_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/117_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/117_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/117_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/66_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/66_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/66_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/264_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/264_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/264_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/473_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/473_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/473_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/347_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/347_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/347_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/445_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/445_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/445_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/409_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/409_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/409_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/77_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/77_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/77_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/124_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/124_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/124_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/267_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/267_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/267_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/210_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/210_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/210_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/258_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/258_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/258_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/324_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/324_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/324_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/134_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/134_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/134_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/196_drrimage_view_2.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/196_semantic_label_view_2.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/196_xrayimage_view_2.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/499_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/499_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/499_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/382_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/382_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/382_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/94_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/94_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/94_xrayimage_view_1.png"
+    },
+    {
+        "drr": "/home/vy/welsh_dragon_20251208/drr/drr_images/51_drrimage_view_1.png",
+        "mask": "/home/vy/welsh_dragon_20251208/mask/51_semantic_label_view_1.png",
+        "xray": "/home/vy/welsh_dragon_20251208/xray/51_xrayimage_view_1.png"
+    }
+]

@@ -1,8 +1,8 @@
 # Data paths
 data:
-  train: "/home/vy/project/data/train"
-  val: "/home/vy/project/data/val"
-  test: "/home/vy/project/data/test"
+  train: "./data/welsh_jsons/train.json"
+  val: "./data/welsh_jsons/val.json"
+  test: "./data/welsh_jsons/test.json"
   batch_size: 4
   num_workers: 4
   image_size_0: 512
