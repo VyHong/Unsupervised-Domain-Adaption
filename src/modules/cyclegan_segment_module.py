@@ -125,6 +125,11 @@ class Module(pl.LightningModule):
 
         return total_loss
 
+    def on_train_epoch_end(self):
+        schedulers = self.lr_schedulers()
+        if schedulers is not None:
+            schedulers.step()
+
     def test_step(self, batch, batch_idx):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
