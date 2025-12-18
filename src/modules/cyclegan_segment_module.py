@@ -174,9 +174,9 @@ class Module(pl.LightningModule):
         # Check if scheduler is enabled in config
         if self.cfg.get("scheduler", {}).get("enabled", False):
             scheduler_cfg = self.cfg["scheduler"]
-            warmup_epochs = scheduler_cfg.get("warmup_epochs", 0)
-            decay_epochs = scheduler_cfg.get("decay_epochs", 100)
-            min_lr = scheduler_cfg.get("min_lr", 1e-6)
+            warmup_epochs = int(scheduler_cfg.get("warmup_epochs", 0))
+            decay_epochs = int(scheduler_cfg.get("decay_epochs", 100))
+            min_lr = float(scheduler_cfg.get("min_lr", 1e-6))
 
             # Learning rate scheduler: constant for warmup_epochs, then cosine decay for decay_epochs
             scheduler1 = torch.optim.lr_scheduler.ConstantLR(
