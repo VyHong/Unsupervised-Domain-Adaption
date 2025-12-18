@@ -10,17 +10,17 @@ import pytorch_lightning as pl
 class DataModule(pl.LightningDataModule):
     def __init__(
         self,
-        trains_dir,
-        vals_dir,
-        tests_dir,
+        train_json,
+        val_json,
+        test_json,
         transform=None,
         batch_size=4,
         num_workers=4,
     ):
         super().__init__()
-        self.trains_dir = normalize_path_for_os(trains_dir)
-        self.vals_dir = normalize_path_for_os(vals_dir)
-        self.tests_dir = normalize_path_for_os(tests_dir)
+        self.train_json = normalize_path_for_os(train_json)
+        self.val_json = normalize_path_for_os(val_json)
+        self.test_json = normalize_path_for_os(test_json)
         self.batch_size = batch_size
         self.num_workers = num_workers
 
@@ -36,23 +36,16 @@ class DataModule(pl.LightningDataModule):
     def setup(self, stage=None):
         if stage == "fit":
             self.train_dataset = MappedDataset(
-                os.path.join(self.trains_dir, "xray"),
-                os.path.join(self.trains_dir, "drr"),
-                os.path.join(self.trains_dir, "mask"),
+                self.train_json,
                 transform=self.transform,
             )
             self.val_dataset = MappedDataset(
-                os.path.join(self.vals_dir, "xray"),
-                os.path.join(self.vals_dir, "drr"),
-                os.path.join(self.vals_dir, "mask"),
+                self.val_json,
                 transform=self.transform,
             )
-            print(len(self.train_dataset), len(self.val_dataset))
         if stage == "test":
             self.dataset = MappedDataset(
-                os.path.join(self.tests_dir, "drr"),
-                os.path.join(self.tests_dir, "xray"),
-                os.path.join(self.tests_dir, "mask"),
+                self.test_json,
                 transform=self.transform,
             )
 
