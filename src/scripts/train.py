@@ -4,6 +4,10 @@ from pytorch_lightning.callbacks import ModelCheckpoint, LearningRateMonitor
 from ..datamodules.datamodule import DataModule
 from ..modules.cyclegan_segment_module import Module
 import yaml
+import torch.multiprocessing
+
+torch.multiprocessing.set_sharing_strategy("file_system")
+
 
 if __name__ == "__main__":
     # ----------------------------
