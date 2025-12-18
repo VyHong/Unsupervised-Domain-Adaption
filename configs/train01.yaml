@@ -45,6 +45,13 @@ cyclegan:
   device: cuda
   num_labels: 2
 
+# Learning rate scheduler
+scheduler:
+  enabled: True
+  warmup_epochs: 100 # epochs to keep constant LR
+  decay_epochs: 100 # epochs to decay LR
+  min_lr: 1e-6 # minimum learning rate after decay
+
 # Segmentation hyperparameters
 segmodel:
   lr: 2e-4

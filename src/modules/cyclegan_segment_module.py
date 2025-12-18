@@ -160,4 +160,35 @@ class Module(pl.LightningModule):
 
         all_params = list(gan_params) + list(seg_params)
         optimizer = torch.optim.AdamW(all_params, lr=float(self.gan_lr))
+
+        # Check if scheduler is enabled in config
+        if self.cfg.get("scheduler", {}).get("enabled", False):
+            scheduler_cfg = self.cfg["scheduler"]
+            warmup_epochs = scheduler_cfg.get("warmup_epochs", 0)
+            decay_epochs = scheduler_cfg.get("decay_epochs", 100)
+            min_lr = scheduler_cfg.get("min_lr", 1e-6)
+
+            # Learning rate scheduler: constant for warmup_epochs, then cosine decay for decay_epochs
+            scheduler1 = torch.optim.lr_scheduler.ConstantLR(
+                optimizer, factor=1.0, total_iters=warmup_epochs
+            )
+            scheduler2 = torch.optim.lr_scheduler.CosineAnnealingLR(
+                optimizer, T_max=decay_epochs, eta_min=min_lr
+            )
+            scheduler = torch.optim.lr_scheduler.SequentialLR(
+                optimizer,
+                schedulers=[scheduler1, scheduler2],
+                milestones=[warmup_epochs],
+            )
+
+            return {
+                "optimizer": optimizer,
+                "lr_scheduler": {
+                    "scheduler": scheduler,
+                    "interval": "epoch",
+                    "frequency": 1,
+                },
+            }
+
+        # Return optimizer only if scheduler is disabled
         return optimizer
