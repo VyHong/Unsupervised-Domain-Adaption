@@ -24,8 +24,7 @@ cyclegan:
   lr: 1e-4
 
   isTrain: True
-  lambda_cycle: 10.0
-  lambda_A: 1
+  lambda_A: 2
   lambda_B: 1
   lambda_identity: 10
   model: "cycle_gan"

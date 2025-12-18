@@ -125,11 +125,6 @@ class Module(pl.LightningModule):
 
         return total_loss
 
-    def on_train_epoch_end(self):
-        schedulers = self.lr_schedulers()
-        if schedulers is not None:
-            schedulers.step()
-
     def test_step(self, batch, batch_idx):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
@@ -185,12 +180,12 @@ class Module(pl.LightningModule):
             decay_epochs = int(scheduler_cfg.get("decay_epochs", 100))
             min_lr = float(scheduler_cfg.get("min_lr", 1e-6))
 
-            # Learning rate scheduler: constant for warmup_epochs, then cosine decay for decay_epochs
+            # Learning rate scheduler: constant for warmup_epochs, then decay over decay_epochs
             scheduler1 = torch.optim.lr_scheduler.ConstantLR(
                 optimizer, factor=1.0, total_iters=warmup_epochs
             )
-            scheduler2 = torch.optim.lr_scheduler.CosineAnnealingLR(
-                optimizer, T_max=decay_epochs, eta_min=min_lr
+            scheduler2 = torch.optim.lr_scheduler.PolynomialLR(
+                optimizer, total_iters=decay_epochs, end_lr=min_lr
             )
             scheduler = torch.optim.lr_scheduler.SequentialLR(
                 optimizer,
@@ -209,3 +204,8 @@ class Module(pl.LightningModule):
 
         # Return optimizer only if scheduler is disabled
         return optimizer
+
+    def on_train_epoch_end(self):
+        schedulers = self.lr_schedulers()
+        if schedulers is not None:
+            schedulers.step()
