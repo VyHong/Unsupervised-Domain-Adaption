@@ -24,9 +24,9 @@ if __name__ == "__main__":
     )
 
     datamodule = DataModule(
-        trains_dir=cfg["data"]["train"],
-        vals_dir=cfg["data"]["val"],
-        tests_dir=cfg["data"]["test"],
+        train_json=cfg["data"]["train"],
+        val_json=cfg["data"]["val"],
+        test_json=cfg["data"]["test"],
         transform=transform,
         batch_size=cfg["data"]["batch_size"],
         num_workers=cfg["data"]["num_workers"],
