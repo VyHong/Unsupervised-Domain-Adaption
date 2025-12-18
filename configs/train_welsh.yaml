@@ -7,6 +7,7 @@ data:
   num_workers: 4
   image_size_0: 512
   image_size_1: 512
+  cached: True
 
 # Training
 trainer:
@@ -26,13 +27,13 @@ cyclegan:
   lambda_cycle: 10.0
   lambda_A: 1
   lambda_B: 1
-  lambda_identity: 50
+  lambda_identity: 10
   model: "cycle_gan"
   input_nc: 3 # Number of input image channels (e.g., 3 for RGB)
   output_nc: 3 # Number of output image channels
   ngf: 64 # Number of generator filters in the last conv layer
   ndf: 64 # Number of discriminator filters in the first conv layer
-  netG: "resnet_9blocks" # Generator architecture
+  netG: "unet_256" # Generator architecture
   netD: "basic" # Discriminator architecture (70x70 PatchGAN)
   n_layers_D: 3 # Number of layers in discriminator (if netD==n_layers)
   norm: "instance" # Normalization type [instance | batch]

@@ -30,6 +30,7 @@ if __name__ == "__main__":
         transform=transform,
         batch_size=cfg["data"]["batch_size"],
         num_workers=cfg["data"]["num_workers"],
+        cached=cfg["data"]["cached"],
     )
 
     # ----------------------------

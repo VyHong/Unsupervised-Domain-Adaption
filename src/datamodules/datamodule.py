@@ -16,6 +16,7 @@ class DataModule(pl.LightningDataModule):
         transform=None,
         batch_size=4,
         num_workers=4,
+        cached=False,
     ):
         super().__init__()
         self.train_json = normalize_path_for_os(train_json)
@@ -23,6 +24,7 @@ class DataModule(pl.LightningDataModule):
         self.test_json = normalize_path_for_os(test_json)
         self.batch_size = batch_size
         self.num_workers = num_workers
+        self.cached = cached
 
         if transform is None:
             self.transform = transforms.Compose(
@@ -35,19 +37,35 @@ class DataModule(pl.LightningDataModule):
 
     def setup(self, stage=None):
         if stage == "fit":
-            self.train_dataset = MappedDataset(
-                self.train_json,
-                transform=self.transform,
-            )
-            self.val_dataset = MappedDataset(
-                self.val_json,
-                transform=self.transform,
-            )
+            if self.cached:
+                self.train_dataset = CachedMappedDataset(
+                    self.train_json,
+                    transform=self.transform,
+                )
+                self.val_dataset = CachedMappedDataset(
+                    self.val_json,
+                    transform=self.transform,
+                )
+            else:
+                self.train_dataset = MappedDataset(
+                    self.train_json,
+                    transform=self.transform,
+                )
+                self.val_dataset = MappedDataset(
+                    self.val_json,
+                    transform=self.transform,
+                )
         if stage == "test":
-            self.dataset = MappedDataset(
-                self.test_json,
-                transform=self.transform,
-            )
+            if self.cached:
+                self.dataset = CachedMappedDataset(
+                    self.test_json,
+                    transform=self.transform,
+                )
+            else:
+                self.dataset = MappedDataset(
+                    self.test_json,
+                    transform=self.transform,
+                )
 
     def train_dataloader(self):
         return DataLoader(
