@@ -49,7 +49,7 @@ cyclegan:
 # Learning rate scheduler
 scheduler:
   enabled: True
-  warmup_epochs: 100 # epochs to keep constant LR
+  warmup_epochs: 1 # epochs to keep constant LR
   decay_epochs: 100 # epochs to decay LR
   min_lr: 1e-8 # minimum learning rate after decay
 
