@@ -54,7 +54,8 @@ class Module(pl.LightningModule):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
-        current_lr = self.optimizer.param_groups[0]["lr"]
+        optimizer = self.optimizers()
+        current_lr = optimizer.param_groups[0]["lr"]
         log_dict = {
             "train_gan_loss": gan_loss,
             "train_seg_loss": seg_loss,
@@ -72,7 +73,8 @@ class Module(pl.LightningModule):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
-        current_lr = self.optimizer.param_groups[0]["lr"]
+        optimizer = self.optimizers()
+        current_lr = optimizer.param_groups[0]["lr"]
         log_dict = {
             "val_gan_loss": gan_loss,
             "val_seg_loss": seg_loss,
@@ -127,7 +129,8 @@ class Module(pl.LightningModule):
         gan_loss, seg_loss, total_loss, output_tensors = self.shared_step(
             batch, batch_idx
         )
-        current_lr = self.optimizer.param_groups[0]["lr"]
+        optimizer = self.optimizers()
+        current_lr = optimizer.param_groups[0]["lr"]
         log_dict = {
             "test_gan_loss": gan_loss,
             "test_seg_loss": seg_loss,
@@ -169,7 +172,6 @@ class Module(pl.LightningModule):
 
         all_params = list(gan_params) + list(seg_params)
         optimizer = torch.optim.AdamW(all_params, lr=float(self.gan_lr))
-        self.optimizer = optimizer
 
         # Check if scheduler is enabled in config
         if self.cfg.get("scheduler", {}).get("enabled", False):
